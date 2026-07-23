@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -6,13 +7,12 @@
     <title>Panasonic AC Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #f0f2f5; padding: 20px; }
-        .card { background: white; max-width: 380px; margin: 0 auto; padding: 25px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        .btn { width: 100%; padding: 12px; margin: 8px 0; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        body { font-family: sans-serif; text-align: center; background: #f0f2f5; padding: 20px; }
+        .card { background: white; max-width: 380px; margin: 0 auto; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn { width: 100%; padding: 12px; margin: 8px 0; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
         .btn-on { background-color: #2e7d32; color: white; }
         .btn-off { background-color: #c62828; color: white; }
         .btn-action { background-color: #0288d1; color: white; }
-        .btn:active { transform: scale(0.98); }
         #status { font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #757575; }
         #ack-status { font-size: 13px; margin-bottom: 20px; color: #0288d1; font-weight: bold; }
         select, input[type=range] { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
@@ -51,15 +51,14 @@
 </div>
 
 <script>
-    // --- HiveMQ Cloud Config ---
     const broker = "4d79d42984154e37aab32ca068370f40.s1.eu.hivemq.cloud";
-    const port = 8884; // พอร์ต WSS
+    const port = 8884;
     const username = "esp32_user";
     const password = "Mcl19508";
 
     const topicSet = "home/ac/panasonic/set";
     const topicState = "home/ac/panasonic/state";
-    const clientID = "web_client_" + Math.random().toString(16).substr(2, 8);
+    const clientID = "Web_Dashboard_" + Math.floor(Math.random() * 1000000);
 
     const client = new Paho.MQTT.Client(broker, port, clientID);
 
